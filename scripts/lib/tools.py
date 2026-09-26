@@ -47,5 +47,8 @@ def observed_efuse_state(summary: dict) -> dict:
     def value(name):
         item = summary.get(name)
         return item.get("value") if isinstance(item, dict) else None
-    return {"secure_boot": value("SECURE_BOOT_EN"),
-            "flash_encryption_spi_boot_crypt_cnt": value("SPI_BOOT_CRYPT_CNT")}
+    crypt_count = value("SPI_BOOT_CRYPT_CNT")
+    flash_state = ({"spi_boot_crypt_cnt": crypt_count,
+                    "enabled": bool(crypt_count.bit_count() % 2)}
+                   if isinstance(crypt_count, int) else None)
+    return {"secure_boot": value("SECURE_BOOT_EN"), "flash_encryption": flash_state}

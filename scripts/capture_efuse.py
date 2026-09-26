@@ -31,7 +31,7 @@ def main():
     if data:
         state = observed_efuse_state(data)
         run.update(secure_boot_state_observed=state["secure_boot"],
-                   flash_encryption_state_observed=state["flash_encryption_spi_boot_crypt_cnt"])
+                   flash_encryption_state_observed=state["flash_encryption"])
     run.event("EFUSE_CAPTURED", phase=args.phase, raw_exit_code=raw["exit_code"], json_exit_code=parsed["exit_code"])
     print(run.path)
     return 0 if raw["exit_code"] == 0 else 1

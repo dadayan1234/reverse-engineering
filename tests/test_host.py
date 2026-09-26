@@ -11,6 +11,7 @@ from lib.research_logger import ResearchRun, sha256_file, write_new
 from acquire_flash import classify_acquisition
 from compare_results import summarize_run
 from provisioning_plan import destructive_gate
+from lib.tools import observed_efuse_state
 
 
 class HostPipelineTests(unittest.TestCase):
@@ -61,6 +62,13 @@ class HostPipelineTests(unittest.TestCase):
             destructive_gate(False)
         with self.assertRaises(PermissionError):
             destructive_gate(True)
+
+    def test_efuse_state_parity_and_unknown(self):
+        self.assertIsNone(observed_efuse_state({})["flash_encryption"])
+        state = observed_efuse_state({"SECURE_BOOT_EN": {"value": False},
+                                      "SPI_BOOT_CRYPT_CNT": {"value": 3}})
+        self.assertFalse(state["secure_boot"])
+        self.assertFalse(state["flash_encryption"]["enabled"])
 
 
 if __name__ == "__main__":
