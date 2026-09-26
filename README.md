@@ -23,6 +23,8 @@ git commit -m "Initialize ESP32-S3 research project"
 
 For button timing, mode changes, expected files, and a visual flowchart, follow the [Indonesian A_BASELINE tutorial](docs/tutorial_a_baseline.md).
 
+The completed first hardware run and its interpretation are documented in the [initial A_BASELINE report](docs/laporan_awal_A_BASELINE.md).
+
 Run these commands in PowerShell from the repository root. Replace `COMx`, board marking, and wiring text with observed facts. Each script prints the evidence directory path. Copy it into `$run`; this variable is for the current PowerShell session only.
 
 ```powershell
@@ -56,6 +58,6 @@ The four PlatformIO environments use separate resolved `sdkconfig.<env>` files a
 
 ## Current hardware-dependent items
 
-The actual COM port, physical N16R8 marking and wiring, chip revision, flash ID/size, PSRAM capacity, eFuse state, serial boot, and real extraction results require the board. Secure-scenario signing keys and exact provisioning commands require review against the installed ESP-IDF version and board state. No secure scenario result is implied by its config file.
+One A_BASELINE run is complete on `board01` through CH343 `COM5`; the [initial report](docs/laporan_awal_A_BASELINE.md) gives its observed chip/memory, eFuse, boot, acquisition, and marker results. The exact module/PCB marking and power wiring still need operator documentation, and baseline repeatability has not yet been measured. Secure-scenario signing keys and exact provisioning commands require review against the installed ESP-IDF version and each board's state. No secure scenario result is implied by its config file.
 
 Official references: [PlatformIO ESP32 configuration](https://docs.platformio.org/en/latest/platforms/espressif32.html), [ESP-IDF ESP32-S3 Secure Boot V2](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/security/secure-boot-v2.html), [ESP-IDF ESP32-S3 Flash Encryption](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/security/flash-encryption.html), [esptool](https://docs.espressif.com/projects/esptool/en/latest/esp32s3/esptool/), and [espefuse](https://docs.espressif.com/projects/esptool/en/latest/esp32s3/espefuse/).
