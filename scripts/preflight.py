@@ -26,7 +26,8 @@ def main():
         run.event("RUN_FAILED", reason=str(error))
         print(run.path)
         return 1
-    base = module_command("esptool") + ["--chip", "esp32s3", "--port", args.port]
+    after_mode = "no-reset" if "-" in chip_command else "no_reset"
+    base = module_command("esptool") + ["--chip", "esp32s3", "--port", args.port, "--after", after_mode]
     chip = run.command(base + [chip_command], "chip_info")
     flash = run.command(base + [flash_command], "flash_id")
     write_new(run.path / "device" / "chip_info_raw.txt", chip["stdout"] + chip["stderr"])

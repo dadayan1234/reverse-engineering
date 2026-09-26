@@ -37,7 +37,8 @@ def main():
         run.event("ACQUISITION_FAILED", reason=str(error))
         print(run.path)
         return 1
-    base = module_command("esptool") + ["--chip", "esp32s3", "--port", args.port]
+    after_mode = "no-reset" if "-" in read_command else "no_reset"
+    base = module_command("esptool") + ["--chip", "esp32s3", "--port", args.port, "--after", after_mode]
     flash = run.command(base + [flash_command], "acquisition_flash_id")
     run.update(rom_download_accessible=flash["exit_code"] == 0)
     detected = flash_size_bytes(flash["stdout"] + flash["stderr"])

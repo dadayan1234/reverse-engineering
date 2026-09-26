@@ -21,6 +21,8 @@ git commit -m "Initialize ESP32-S3 research project"
 
 ## Exact A_BASELINE sequence
 
+For button timing, mode changes, expected files, and a visual flowchart, follow the [Indonesian A_BASELINE tutorial](docs/tutorial_a_baseline.md).
+
 Run these commands in PowerShell from the repository root. Replace `COMx`, board marking, and wiring text with observed facts. Each script prints the evidence directory path. Copy it into `$run`; this variable is for the current PowerShell session only.
 
 ```powershell
