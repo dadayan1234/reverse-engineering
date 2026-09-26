@@ -54,6 +54,8 @@ To inspect only the application image recovered from a successful raw dump, run 
 
 The observed baseline firmware-only extraction is explained in the [Indonesian firmware dump analysis](docs/analisis_firmware_dump_baseline.md).
 
+The [full A_BASELINE firmware forensic report](docs/laporan_forensik_firmware_A_BASELINE.md) maps the raw dump, documents exact byte/ASCII/hex/Base64 conversions, and distinguishes deterministic marker recovery from broader confidence claims. To verify the image boundary and markers **without the archived build `firmware.bin`**, run `python scripts/verify_dump_independent.py --run $run --tag <new_unique_tag>` with a Python interpreter that has `esptool`; the script detects the installed `image-info`/`image_info` syntax and preserves each attempt.
+
 ## Security scenarios and provisioning boundary
 
 The four PlatformIO environments use separate resolved `sdkconfig.<env>` files and versioned defaults under `config/`. `baseline` is the only environment permitted by the first-run flash wrapper. `secure_boot`, `flash_encryption`, and `full_security` are **configuration skeletons**. Review their resolved ESP-IDF options, signing-key setup, bootloader/partition implications, and board eFuse state before building/using them on dedicated boards. Flash Encryption skeletons select Release mode; first boot with security enabled can irreversibly provision eFuses. Do not upload or boot secure builds as part of baseline work.

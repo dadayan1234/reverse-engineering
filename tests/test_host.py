@@ -13,6 +13,7 @@ from compare_results import summarize_run
 from provisioning_plan import destructive_gate
 from lib.tools import observed_efuse_state, parse_json_after_banner
 from extract_firmware_secrets import marker_records
+from verify_dump_independent import parse_esp_image
 
 
 class HostPipelineTests(unittest.TestCase):
@@ -46,6 +47,25 @@ class HostPipelineTests(unittest.TestCase):
         self.assertEqual(item["flash_offsets_hex"], ["0x0001000C"])
         self.assertEqual(bytes.fromhex(item["stored_bytes_hex"]), MARKERS["API_KEY"])
         self.assertEqual(item["alternate_sequence_counts_in_image"]["base64_text"], 0)
+
+    def test_build_independent_image_boundary_and_integrity(self):
+        payload = b"synthetic segment contents"
+        header = b"\xe9\x01\x02\x4f" + b"\x00" * 4 + b"\x00" * 15 + b"\x01"
+        segment = (0x3C000020).to_bytes(4, "little") + len(payload).to_bytes(4, "little") + payload
+        body = header + segment
+        checksum = 0xEF
+        for byte in payload:
+            checksum ^= byte
+        body += b"\x00" * ((-len(body) - 1) % 16) + bytes([checksum])
+        image = body + hashlib.sha256(body).digest()
+        parsed = parse_esp_image(image + b"\xff" * 128)
+        self.assertEqual(parsed["image_size_bytes"], len(image))
+        self.assertTrue(parsed["checksum_valid"])
+        self.assertTrue(parsed["validation_hash_valid"])
+        corrupt = bytearray(image)
+        corrupt[-1] ^= 1
+        with self.assertRaisesRegex(ValueError, "validation hash mismatch"):
+            parse_esp_image(bytes(corrupt))
 
     def test_partial_acquisition_and_unknown_aggregation(self):
         self.assertEqual(classify_acquisition(1, 16, 32), "PARTIAL")
