@@ -50,6 +50,8 @@ Each run has a unique directory under `evidence/<scenario>/` with `manifest.json
 
 `results/experiment_summary.json` and `.csv` are regenerated from evidence. Never edit results by hand. A secret in a runtime log is classified as `SECRET_LOG_EXPOSURE`.
 
+To inspect only the application image recovered from a successful raw dump, run `python scripts/extract_firmware_secrets.py --run $run`. It writes `analysis/firmware_from_dump.bin`, its SHA-256, and JSON/Markdown tables of synthetic marker addresses and byte representations. The image length is taken from the archived build artifact and the extracted bytes are checked for an exact match; the table labels derived hex/Base64 displays separately from sequences actually present in flash.
+
 ## Security scenarios and provisioning boundary
 
 The four PlatformIO environments use separate resolved `sdkconfig.<env>` files and versioned defaults under `config/`. `baseline` is the only environment permitted by the first-run flash wrapper. `secure_boot`, `flash_encryption`, and `full_security` are **configuration skeletons**. Review their resolved ESP-IDF options, signing-key setup, bootloader/partition implications, and board eFuse state before building/using them on dedicated boards. Flash Encryption skeletons select Release mode; first boot with security enabled can irreversibly provision eFuses. Do not upload or boot secure builds as part of baseline work.

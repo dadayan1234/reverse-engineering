@@ -12,6 +12,7 @@ from acquire_flash import classify_acquisition
 from compare_results import summarize_run
 from provisioning_plan import destructive_gate
 from lib.tools import observed_efuse_state, parse_json_after_banner
+from extract_firmware_secrets import marker_records
 
 
 class HostPipelineTests(unittest.TestCase):
@@ -37,6 +38,14 @@ class HostPipelineTests(unittest.TestCase):
             path = Path(folder) / "fixture.bin"
             path.write_bytes(data)
             self.assertEqual(sha256_file(path), hashlib.sha256(data).hexdigest())
+
+    def test_firmware_marker_address_and_representation(self):
+        image = b"\xff" * 12 + MARKERS["API_KEY"] + b"\xff" * 4
+        item = marker_records(image, 0x10000)["API_KEY"]
+        self.assertEqual(item["image_offsets_hex"], ["0x0000000C"])
+        self.assertEqual(item["flash_offsets_hex"], ["0x0001000C"])
+        self.assertEqual(bytes.fromhex(item["stored_bytes_hex"]), MARKERS["API_KEY"])
+        self.assertEqual(item["alternate_sequence_counts_in_image"]["base64_text"], 0)
 
     def test_partial_acquisition_and_unknown_aggregation(self):
         self.assertEqual(classify_acquisition(1, 16, 32), "PARTIAL")
