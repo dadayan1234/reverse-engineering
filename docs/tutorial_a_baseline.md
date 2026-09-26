@@ -118,6 +118,8 @@ Get-Content -LiteralPath "$run\acquisition\acquisition.json"
 
 Untuk flash terdeteksi 16 MB, skrip meminta offset `0x0` dan ukuran `0x1000000` byte. Pembacaan dapat memakan waktu. `status` harus `SUCCESS`, `actual_size` harus `16777216`, dan SHA-256 harus ada. Jika pembacaan gagal atau hanya sebagian, `stdout.log`, `stderr.log`, metadata, dan dump parsial (jika ada) tetap menjadi evidence. Jangan menghapus atau mengedit dump mentah.
 
+Kecepatan serial bawaan akuisisi adalah `460800` baud dan disimpan di metadata. Jika sambungan CH343 tidak stabil, buat run baru dan gunakan `--baud 115200`; jangan mengulang pada direktori evidence yang sama.
+
 ## 7. Analisis dan agregasi
 
 ```powershell

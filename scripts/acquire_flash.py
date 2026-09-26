@@ -23,9 +23,12 @@ def main():
     parser = argparse.ArgumentParser(description="Acquire raw flash via installed esptool")
     add_run_arguments(parser)
     parser.add_argument("--port", required=True)
+    parser.add_argument("--baud", type=int, default=460800)
     parser.add_argument("--offset", type=lambda x: int(x, 0), default=0)
     parser.add_argument("--size", type=lambda x: int(x, 0), help="Must match or fit detected flash capacity")
     args = parser.parse_args()
+    if args.baud <= 0:
+        raise ValueError("baud must be positive")
     run = get_run(args)
     run.event("ACQUISITION_STARTED", port=args.port)
     try:
@@ -38,11 +41,14 @@ def main():
         print(run.path)
         return 1
     after_mode = "no-reset" if "-" in read_command else "no_reset"
-    base = module_command("esptool") + ["--chip", "esp32s3", "--port", args.port, "--after", after_mode]
+    base = module_command("esptool") + ["--chip", "esp32s3", "--port", args.port,
+                                        "--baud", str(args.baud), "--after", after_mode]
     flash = run.command(base + [flash_command], "acquisition_flash_id")
     run.update(rom_download_accessible=flash["exit_code"] == 0)
     detected = flash_size_bytes(flash["stdout"] + flash["stderr"])
     write_new(run.path / "acquisition" / "flash_id_raw.txt", flash["stdout"] + flash["stderr"])
+    revision = run.command(["git", "rev-parse", "HEAD"], "acquisition_git_commit")
+    tool_commit = revision["stdout"].strip() if revision["exit_code"] == 0 else None
     prior = run.manifest.get("flash_size_detected")
     if not detected or (prior and detected != prior):
         run.update(flash_read_attempted=False, flash_read_success=False,
@@ -72,12 +78,14 @@ def main():
     metadata = {"offset": args.offset, "requested_size": size, "actual_size": actual,
                 "duration_seconds": result["duration_seconds"], "exit_code": result["exit_code"],
                 "status": status, "sha256": digest, "started_at": started, "finished_at": finished,
-                "flash_size_detected": detected, "port": args.port}
+                "flash_size_detected": detected, "port": args.port, "baud": args.baud,
+                "acquisition_tool_commit": tool_commit}
     write_json_new(run.path / "acquisition" / "acquisition.json", metadata)
     write_json_new(run.path / "acquisition" / "flash_dump.metadata.json", metadata)
     run.update(serial_port=args.port, flash_size_detected=detected, flash_read_attempted=True,
                flash_read_success=status == "SUCCESS", acquisition_status=status,
                dump_size_bytes=actual, dump_sha256=digest)
+    run.update(acquisition_tool_commit=tool_commit)
     run.event("ACQUISITION_COMPLETED" if status == "SUCCESS" else
               "ACQUISITION_PARTIAL" if status == "PARTIAL" else "ACQUISITION_FAILED", **metadata)
     print(run.path)
