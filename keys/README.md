@@ -1,0 +1,1 @@
+Signing and encryption keys must be created and managed by the operator for dedicated research boards. Never commit private keys or key material. Secure scenario configuration is preparatory until the installed ESP-IDF flow and board state are verified.

@@ -1,0 +1,14 @@
+.pio/
+.platformio-core/
+.venv/
+__pycache__/
+*.pyc
+sdkconfig.*
+!config/**/sdkconfig.defaults
+evidence/*
+!evidence/.gitkeep
+results/*
+!results/.gitkeep
+keys/*
+!keys/README.md
+!keys/.gitignore

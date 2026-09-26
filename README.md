@@ -1,0 +1,59 @@
+# ESP32-S3 N16R8 firmware security experiment
+
+This Windows-first PlatformIO + ESP-IDF project tests four fixed scenarios using the same application source and synthetic secrets: `A_BASELINE`, `B_SECURE_BOOT`, `C_FLASH_ENCRYPTION`, and `D_FULL_SECURITY`. Flash Encryption tests confidentiality of protected off-chip flash. Secure Boot V2 tests boot authenticity and integrity. The hypotheses and exact marker values live in [seed.md](seed.md); do not replace them with real credentials.
+
+## Setup
+
+Install VS Code with the PlatformIO IDE extension, Python 3.12 for PlatformIO/ESP-IDF, and a Python interpreter with `esptool` and `pyserial` for the research scripts. On this host, Python 3.14 runs the scripts and Python 3.12 is available for PlatformIO. The scripts use `py -3.12 -m platformio` by default on Windows; set `RESEARCH_PIO_PYTHON` to a supported Python executable if needed. The scripts set `PLATFORMIO_CORE_DIR` to `.platformio-core` beside this repository so ESP-IDF package paths avoid spaces in the Windows user profile and stay outside the project source tree. The parent directory must be writable.
+
+```powershell
+py -3.12 -m pip install platformio
+python -m pip install esptool pyserial
+python -m unittest discover -s tests -v
+```
+
+Use a dedicated board for each scenario when possible. `esp32-s3-devkitc-1` is only a build starting point. Verify the physical module marking, 16 MB flash, 8 MB PSRAM if practical, and actual UART0/download-mode wiring. The preflight reports PSRAM as unknown unless observed; board labels alone do not verify it. Use 3.3 V UART logic and a common ground. Note the COM port assigned by Windows. Commit the source/config before an experiment so the run records a Git commit.
+
+```powershell
+git add .
+git commit -m "Initialize ESP32-S3 research project"
+```
+
+## Exact A_BASELINE sequence
+
+Run these commands in PowerShell from the repository root. Replace `COMx`, board marking, and wiring text with observed facts. Each script prints the evidence directory path. Copy it into `$run`; this variable is for the current PowerShell session only.
+
+```powershell
+python scripts/capture_versions.py --scenario A_BASELINE --board-id board01
+$run = 'evidence\A_BASELINE\<directory printed above>'
+python scripts/preflight.py --run $run --port COMx --board-marking 'actual marking' --wiring 'actual USB-C or UART0 pins, 3.3 V, power source'
+python scripts/capture_efuse.py --run $run --port COMx --phase before
+python scripts/build_evidence.py --run $run
+python scripts/flash_baseline.py --run $run --port COMx
+python scripts/capture_serial.py --run $run --port COMx --seconds 35
+python scripts/acquire_flash.py --run $run --port COMx
+python scripts/analyze_dump.py --run $run
+python scripts/compare_results.py
+```
+
+Place the board in the ROM download mode required by its documentation before preflight/acquisition. Reset into normal boot for serial capture; return to ROM mode for acquisition. A 16 MB read uses offset `0x0` and size `0x1000000` only after flash size is detected. If a step fails, preserve that run and create a new run for the next attempt. `acquire_flash.py` keeps a partial dump and records the failed command. `compare_results.py` leaves unobserved fields null.
+
+The baseline is experimentally complete only when the real board builds, flashes, boots, preflight/eFuse evidence is present, raw flash is acquired and hashed, the exact markers are analyzed, and the run appears in the summary. A missing board, unavailable port, or failed read is an observed limitation, not a positive result.
+
+## Evidence and interpretation
+
+Each run has a unique directory under `evidence/<scenario>/` with `manifest.json`, chronological `events.jsonl`, `audit.jsonl`, and `host/`, `build/`, `device/`, `runtime/`, `acquisition/`, and `analysis/` subdirectories. External commands preserve args, cwd, times, duration, exit code, stdout, and stderr. Build evidence includes resolved `sdkconfig`, firmware/bootloader/partition hashes, log, Git commit, and tool versions. Acquisition evidence includes the raw or partial dump, SHA-256, command, output, and metadata. Analysis scans exact ASCII bytes; entropy is supporting context only. The partition parser reports structures found in acquired bytes, separately from any expected build offsets.
+
+`results/experiment_summary.json` and `.csv` are regenerated from evidence. Never edit results by hand. A secret in a runtime log is classified as `SECRET_LOG_EXPOSURE`.
+
+## Security scenarios and provisioning boundary
+
+The four PlatformIO environments use separate resolved `sdkconfig.<env>` files and versioned defaults under `config/`. `baseline` is the only environment permitted by the first-run flash wrapper. `secure_boot`, `flash_encryption`, and `full_security` are **configuration skeletons**. Review their resolved ESP-IDF options, signing-key setup, bootloader/partition implications, and board eFuse state before building/using them on dedicated boards. Flash Encryption skeletons select Release mode; first boot with security enabled can irreversibly provision eFuses. Do not upload or boot secure builds as part of baseline work.
+
+`python scripts/provisioning_plan.py --run $run` creates a reviewable plan. It contains no eFuse burn implementation. Even `--confirm-destructive` refuses to burn. The operator must separately design and authorize any later provisioning process after baseline reproducibility is established. Capture `efuse_after` only after an actual operator action, using `capture_efuse.py --phase after`.
+
+## Current hardware-dependent items
+
+The actual COM port, physical N16R8 marking and wiring, chip revision, flash ID/size, PSRAM capacity, eFuse state, serial boot, and real extraction results require the board. Secure-scenario signing keys and exact provisioning commands require review against the installed ESP-IDF version and board state. No secure scenario result is implied by its config file.
+
+Official references: [PlatformIO ESP32 configuration](https://docs.platformio.org/en/latest/platforms/espressif32.html), [ESP-IDF ESP32-S3 Secure Boot V2](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/security/secure-boot-v2.html), [ESP-IDF ESP32-S3 Flash Encryption](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/security/flash-encryption.html), [esptool](https://docs.espressif.com/projects/esptool/en/latest/esp32s3/esptool/), and [espefuse](https://docs.espressif.com/projects/esptool/en/latest/esp32s3/espefuse/).
