@@ -2,7 +2,7 @@ import argparse
 import json
 import sys
 from lib.research_logger import add_run_arguments, get_run, write_json_new, write_new
-from lib.tools import module_command, observed_efuse_state
+from lib.tools import module_command, observed_efuse_state, parse_json_after_banner
 
 
 def main():
@@ -17,8 +17,8 @@ def main():
     write_new(run.path / "device" / f"efuse_{args.phase}_raw.txt", raw["stdout"] + raw["stderr"])
     parsed = run.command(prefix + ["--format", "json"], f"efuse_{args.phase}_json")
     try:
-        data = json.loads(parsed["stdout"]) if parsed["exit_code"] == 0 else None
-    except json.JSONDecodeError:
+        data = parse_json_after_banner(parsed["stdout"]) if parsed["exit_code"] == 0 else None
+    except (json.JSONDecodeError, ValueError):
         data = None
     write_json_new(run.path / "device" / f"efuse_{args.phase}.json",
                    {"parsed": data, "exit_code": parsed["exit_code"], "error": parsed["stderr"]})

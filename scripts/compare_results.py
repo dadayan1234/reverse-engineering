@@ -60,7 +60,9 @@ def main():
     for path in paths:
         run = ResearchRun(path.parent)
         run.event("RESULT_AGGREGATED", output=str(json_path))
-        efuse_file = run.path / "device" / "efuse_before.json"
+        efuse_file = run.path / "device" / "efuse_before_reparsed.json"
+        if not efuse_file.exists():
+            efuse_file = run.path / "device" / "efuse_before.json"
         efuse_ok = efuse_file.exists() and json.loads(efuse_file.read_text(encoding="utf-8")).get("parsed") is not None
         analysis_file = run.path / "analysis" / "analysis.json"
         analyzed_markers = json.loads(analysis_file.read_text(encoding="utf-8")).get("markers", {}) if analysis_file.exists() else {}

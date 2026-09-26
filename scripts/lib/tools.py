@@ -2,6 +2,7 @@
 import re
 import sys
 import os
+import json
 from pathlib import Path
 
 
@@ -47,8 +48,23 @@ def observed_efuse_state(summary: dict) -> dict:
     def value(name):
         item = summary.get(name)
         return item.get("value") if isinstance(item, dict) else None
-    crypt_count = value("SPI_BOOT_CRYPT_CNT")
+    crypt_item = summary.get("SPI_BOOT_CRYPT_CNT", {})
+    raw_count = crypt_item.get("raw_value") if isinstance(crypt_item, dict) else None
+    try:
+        crypt_count = int(raw_count, 0) if isinstance(raw_count, str) else value("SPI_BOOT_CRYPT_CNT")
+    except ValueError:
+        crypt_count = None
     flash_state = ({"spi_boot_crypt_cnt": crypt_count,
                     "enabled": bool(crypt_count.bit_count() % 2)}
                    if isinstance(crypt_count, int) else None)
     return {"secure_boot": value("SECURE_BOOT_EN"), "flash_encryption": flash_state}
+
+
+def parse_json_after_banner(output: str) -> dict:
+    start = output.find("{")
+    if start < 0:
+        raise ValueError("JSON object not found in command output")
+    data, _ = json.JSONDecoder().raw_decode(output[start:])
+    if not isinstance(data, dict):
+        raise ValueError("expected JSON object")
+    return data

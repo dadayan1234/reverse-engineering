@@ -35,13 +35,14 @@ def main():
     combined = chip["stdout"] + flash["stdout"]
     size = flash_size_bytes(combined)
     chip_seen = bool(re.search(r"ESP32-S3", combined, re.I))
-    revision = re.search(r"(?:Chip revision|revision)\s*[: ]\s*([^\r\n]+)", combined, re.I)
+    revision = re.search(r"\brevision\s+(v[0-9.]+)", combined, re.I)
     psram = re.search(r"PSRAM[^\r\n]*", combined, re.I)
+    psram_8mb = bool(re.search(r"(?:Embedded\s+)?PSRAM\s+8\s*MB", combined, re.I)) if psram else None
     info = {"port": args.port, "board_marking": args.board_marking, "wiring": args.wiring,
             "chip_esp32s3_identified": chip_seen, "chip_revision": revision.group(1) if revision else None,
             "flash_size_bytes": size, "flash_16mb_validated": size == 16 * 1024 * 1024,
             "psram_info": psram.group(0) if psram else None,
-            "psram_8mb_validated": None,
+            "psram_8mb_validated": psram_8mb,
             "chip_command_exit_code": chip["exit_code"], "flash_command_exit_code": flash["exit_code"]}
     write_json_new(run.path / "device" / "preflight.json", info)
     run.update(flash_size_detected=size, chip="ESP32-S3" if chip_seen else None,
