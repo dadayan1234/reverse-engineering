@@ -14,6 +14,7 @@ from provisioning_plan import destructive_gate
 from lib.tools import observed_efuse_state, parse_json_after_banner
 from extract_firmware_secrets import marker_records
 from verify_dump_independent import parse_esp_image
+from extract_wifi_credentials import decode_entry
 
 
 class HostPipelineTests(unittest.TestCase):
@@ -66,6 +67,20 @@ class HostPipelineTests(unittest.TestCase):
         corrupt[-1] ^= 1
         with self.assertRaisesRegex(ValueError, "validation hash mismatch"):
             parse_esp_image(bytes(corrupt))
+
+    def test_wifi_nvs_blob_decoding(self):
+        import base64
+        ssid_raw = (7).to_bytes(4, "little") + b"LAB_NET" + b"\x00" * 25
+        raw, payload, method = decode_entry({"key": "sta.ssid", "encoding": "blob_data",
+                                             "data": base64.b64encode(ssid_raw).decode()})
+        self.assertEqual(raw, ssid_raw)
+        self.assertEqual(payload, b"LAB_NET")
+        self.assertIn("length", method)
+        password_raw = b"TEST_PW\x00" + b"\x00" * 57
+        _, payload, method = decode_entry({"key": "sta.pswd", "encoding": "blob_data",
+                                           "data": base64.b64encode(password_raw).decode()})
+        self.assertEqual(payload, b"TEST_PW")
+        self.assertIn("NUL", method)
 
     def test_partial_acquisition_and_unknown_aggregation(self):
         self.assertEqual(classify_acquisition(1, 16, 32), "PARTIAL")

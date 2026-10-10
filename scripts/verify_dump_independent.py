@@ -101,12 +101,21 @@ def main() -> int:
     table = parse_partition_table(dump)
     if not table["parseable"]:
         raise ValueError("partition table not parseable from dump")
-    factory = next((entry for entry in table["entries"] if entry["type"] == 0 and entry["name"] == "factory"), None)
-    if factory is None:
-        raise ValueError("factory app partition absent")
-    start = factory["offset"]
-    partition = dump[start:start + factory["size"]]
-    parsed = parse_esp_image(partition)
+    app_partitions = [entry for entry in table["entries"] if entry["type"] == 0]
+    candidates = []
+    for entry in app_partitions:
+        start = entry["offset"]
+        partition = dump[start:start + entry["size"]]
+        try:
+            candidates.append((entry, parse_esp_image(partition)))
+        except ValueError:
+            continue
+    if not candidates:
+        raise ValueError("no structurally valid app image found in parsed app partitions")
+    preferred = next((candidate for candidate in candidates if candidate[0]["name"] == "factory"), candidates[0])
+    app_partition, parsed = preferred
+    start = app_partition["offset"]
+    partition = dump[start:start + app_partition["size"]]
     firmware = partition[:parsed["image_size_bytes"]]
     image_hash = hashlib.sha256(firmware).hexdigest()
     firmware_path = output_dir / f"{tag}.bin"
@@ -133,8 +142,10 @@ def main() -> int:
               "verifier_source_sha256": sha256_file(Path(__file__)),
               "esptool_command_record": f"host/commands/{tag}_image_info/command.json",
               "raw_dump_sha256": dump_hash, "partition_table_offset_hex": f"0x{table['offset']:08X}",
-              "factory_partition_offset_hex": f"0x{start:08X}",
-              "factory_partition_size_bytes": factory["size"],
+              "selected_app_partition": app_partition["name"],
+              "app_partition_offset_hex": f"0x{start:08X}",
+              "app_partition_size_bytes": app_partition["size"],
+              "valid_app_partition_candidates": [entry["name"] for entry, _ in candidates],
               "image": parsed, "image_sha256": image_hash,
               "esptool_image_info_exit_code": image_info["exit_code"], "markers": records}
     write_json_new(output_dir / f"{tag}.json", report)
