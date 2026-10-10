@@ -15,6 +15,8 @@ from lib.tools import observed_efuse_state, parse_json_after_banner
 from extract_firmware_secrets import marker_records
 from verify_dump_independent import parse_esp_image
 from extract_wifi_credentials import decode_entry
+from extract_credential_set import exact_offsets, literal_record, virtual_address
+from compile_timing_metrics import analysis_attempts, seconds_between
 
 
 class HostPipelineTests(unittest.TestCase):
@@ -81,6 +83,32 @@ class HostPipelineTests(unittest.TestCase):
                                            "data": base64.b64encode(password_raw).decode()})
         self.assertEqual(payload, b"TEST_PW")
         self.assertIn("NUL", method)
+
+    def test_exact_credential_literal_mapping(self):
+        firmware = b"\xff" * 0x20 + b"device_a\x00" + b"\xff" * 8
+        segments = [{"image_data_offset_hex": "0x00000020", "size_bytes": 9,
+                     "load_address_hex": "0x3C0A0020"}]
+        item = literal_record("device_a", firmware, 0x10000, segments)
+        self.assertEqual(exact_offsets(firmware, b"device_a"), [0x20])
+        self.assertEqual(item["flash_offsets_hex"], ["0x00010020"])
+        self.assertEqual(item["virtual_addresses_hex"], ["0x3C0A0020"])
+        self.assertEqual(item["derived_base64"], "ZGV2aWNlX2E=")
+        self.assertIsNone(virtual_address(0x40, segments))
+
+    def test_timing_delta_and_incomplete_attempt(self):
+        self.assertEqual(seconds_between("2026-10-10T12:00:00.000+07:00",
+                                         "2026-10-10T12:00:01.250+07:00"), 1.25)
+        events = [
+            {"timestamp": "2026-10-10T12:00:00.000+07:00", "event": "ANALYSIS_STARTED",
+             "subtype": "X"},
+            {"timestamp": "2026-10-10T12:00:01.000+07:00", "event": "ANALYSIS_STARTED",
+             "subtype": "X"},
+            {"timestamp": "2026-10-10T12:00:03.500+07:00", "event": "ANALYSIS_COMPLETED",
+             "subtype": "X"},
+        ]
+        attempts = analysis_attempts(events, "X", "example")
+        self.assertEqual(attempts[0]["status"], "INCOMPLETE_ATTEMPT")
+        self.assertEqual(attempts[1]["duration_seconds"], 2.5)
 
     def test_partial_acquisition_and_unknown_aggregation(self):
         self.assertEqual(classify_acquisition(1, 16, 32), "PARTIAL")
