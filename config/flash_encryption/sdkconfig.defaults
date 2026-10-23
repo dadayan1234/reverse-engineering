@@ -6,3 +6,7 @@ CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
 CONFIG_SECURE_FLASH_ENC_ENABLED=y
 CONFIG_SECURE_FLASH_ENCRYPTION_MODE_RELEASE=y
 # First boot can irreversibly provision eFuses; do not flash or boot this environment yet.
+# Keep ROM download available for research acquisition.
+CONFIG_SECURE_INSECURE_ALLOW_DL_MODE=y
+# CONFIG_SECURE_ENABLE_SECURE_ROM_DL_MODE is not set
+# CONFIG_SECURE_DISABLE_ROM_DL_MODE is not set
