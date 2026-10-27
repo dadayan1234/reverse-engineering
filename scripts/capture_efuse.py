@@ -12,7 +12,10 @@ def main():
     parser.add_argument("--phase", choices=("before", "after"), required=True)
     args = parser.parse_args()
     run = get_run(args)
-    prefix = module_command("espefuse") + ["--chip", "esp32s3", "--port", args.port, "summary"]
+    # Preserve ROM download state during pre-provisioning snapshots. A normal
+    # reset here could start the irreversible first-boot encryption pass.
+    prefix = module_command("espefuse") + ["--chip", "esp32s3", "--port", args.port,
+                                          "--after", "no-reset", "summary"]
     raw = run.command(prefix, f"efuse_{args.phase}_text")
     write_new(run.path / "device" / f"efuse_{args.phase}_raw.txt", raw["stdout"] + raw["stderr"])
     parsed = run.command(prefix + ["--format", "json"], f"efuse_{args.phase}_json")

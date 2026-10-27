@@ -1,0 +1,225 @@
+{
+  "reviewed_at": "2026-10-26T15:59:32.046+07:00",
+  "records": [
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c1.png",
+      "source_name": "c1.png",
+      "copy": "C01_port_inventory.png",
+      "sha256": "46330091dd778812540a8c6da2645da99a9f71251cc17dbc2e8cb1d117dacad5",
+      "size_bytes": 169492,
+      "source_last_write_at": "2026-10-24T15:03:09.022688+07:00",
+      "execution_timestamp": null,
+      "title": "Inventaris port"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c2.png",
+      "source_name": "c2.png",
+      "copy": "C02_chip_identity.png",
+      "sha256": "4a723b6a7262679b42845bd51136f3a78191c09b31d7a302b73950a2aa59efbf",
+      "size_bytes": 90709,
+      "source_last_write_at": "2026-10-24T15:04:58.420246+07:00",
+      "execution_timestamp": null,
+      "title": "Identitas chip"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c3.png",
+      "source_name": "c3.png",
+      "copy": "C03_preflight_json.png",
+      "sha256": "ec239b18001e3130d564b37aa739d3751ba63e7d4dc17d8af91d39e0ae9538ba",
+      "size_bytes": 113064,
+      "source_last_write_at": "2026-10-24T15:08:32.115507+07:00",
+      "execution_timestamp": null,
+      "title": "Validasi N16R8"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c4.1 - running summary.png",
+      "source_name": "c4.1 - running summary.png",
+      "copy": "C04a_efuse_summary.png",
+      "sha256": "06591a7927f34f9cd548d530685b140c4b06920d7d154bac5dfbc6a20b6e8dd3",
+      "size_bytes": 496326,
+      "source_last_write_at": "2026-10-24T15:11:48.179947+07:00",
+      "execution_timestamp": null,
+      "title": "Pembacaan eFuse awal"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c4.2 - summary secure boot confirm disabled.png",
+      "source_name": "c4.2 - summary secure boot confirm disabled.png",
+      "copy": "C04b_security_fuses_before.png",
+      "sha256": "80c57ad804e46a7be8906e9cea4d44173157219438a75f82b8ca57147b6384c3",
+      "size_bytes": 417950,
+      "source_last_write_at": "2026-10-24T15:14:21.207451+07:00",
+      "execution_timestamp": null,
+      "title": "State keamanan awal"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c5.png",
+      "source_name": "c5.png",
+      "copy": "C05_security_fuses_repeated.png",
+      "sha256": "80c57ad804e46a7be8906e9cea4d44173157219438a75f82b8ca57147b6384c3",
+      "size_bytes": 417950,
+      "source_last_write_at": "2026-10-24T15:16:44.976295+07:00",
+      "execution_timestamp": null,
+      "title": "Cuplikan eFuse berulang"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c6.png",
+      "source_name": "c6.png",
+      "copy": "C06_build_manifest_initial.png",
+      "sha256": "e267e1a3d30f3b93b4bfcd9b3f1d9998c1bb3f28c20eb5fdeb77ef53c97c84ea",
+      "size_bytes": 481225,
+      "source_last_write_at": "2026-10-24T15:35:21.481201+07:00",
+      "execution_timestamp": null,
+      "title": "Manifest build awal"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c7.png",
+      "source_name": "c7.png",
+      "copy": "C07_release_plan.png",
+      "sha256": "5cdf8fda89d1174b0eb428a280bc0ed0571a34159919ebaeac96e93da79c3afe",
+      "size_bytes": 119534,
+      "source_last_write_at": "2026-10-24T15:39:27.135808+07:00",
+      "execution_timestamp": null,
+      "title": "Rencana provisioning"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c8.png",
+      "source_name": "c8.png",
+      "copy": "C08_initial_flash_verified.png",
+      "sha256": "b4812491fc9b25622983556993de1520ab63d1b74d120a4abf53c60c67868981",
+      "size_bytes": 200256,
+      "source_last_write_at": "2026-10-24T15:49:35.422901+07:00",
+      "execution_timestamp": null,
+      "title": "Flash awal"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c9.png",
+      "source_name": "c9.png",
+      "copy": "C09_serial_capture_initial.png",
+      "sha256": "5c71452bbc486ee1bf27d4aa8c1262a6205ec02a37d29fff6df75211154f9fab",
+      "size_bytes": 69048,
+      "source_last_write_at": "2026-10-24T15:57:22.171223+07:00",
+      "execution_timestamp": null,
+      "title": "Capture serial awal"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c9.2 - efuse after flash FE.png",
+      "source_name": "c9.2 - efuse after flash FE.png",
+      "copy": "C09b_efuse_diff_empty_initial.png",
+      "sha256": "0a3580812054fdda95b156167b12a06d72b928578d29167a5ddedc0fa8d66d03",
+      "size_bytes": 35212,
+      "source_last_write_at": "2026-10-24T16:04:50.630812+07:00",
+      "execution_timestamp": null,
+      "title": "Diff insiden pertama"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c10.png",
+      "source_name": "c10.png",
+      "copy": "C10_initial_incident_note.png",
+      "sha256": "8396563a9793fab9243456fe0bf135b5b961b163d2df069e7450d5f9a0440516",
+      "size_bytes": 1395055,
+      "source_last_write_at": "2026-10-24T15:56:43.269575+07:00",
+      "execution_timestamp": null,
+      "title": "Catatan insiden pertama"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c13.png",
+      "source_name": "c13.png",
+      "copy": "C13_run_path_typo.png",
+      "sha256": "3a788eba2fbff6280a37a03012d1c82ae73c16a633eae377a969bb075818a17a",
+      "size_bytes": 58545,
+      "source_last_write_at": "2026-10-26T15:27:35.583426+07:00",
+      "execution_timestamp": null,
+      "title": "Run diagnosis dan kesalahan path"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c14.png",
+      "source_name": "c14.png",
+      "copy": "C14_gate_failed.png",
+      "sha256": "95e42b43f1695b03afc18ba98a2db6ff0a3989ebccf9e20e5229864907e19c88",
+      "size_bytes": 90453,
+      "source_last_write_at": "2026-10-26T15:28:04.827132+07:00",
+      "execution_timestamp": null,
+      "title": "Koreksi path dan gate gagal"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c14.1 - dokumentasi incident.png",
+      "source_name": "c14.1 - dokumentasi incident.png",
+      "copy": "C15_mismatch_evidence.png",
+      "sha256": "790d6da75799d001165d865139928f8ea7ced428b8602ad4a616f30e407708bd",
+      "size_bytes": 157237,
+      "source_last_write_at": "2026-10-26T15:33:45.077540+07:00",
+      "execution_timestamp": null,
+      "title": "Bukti mismatch C15"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c16.png",
+      "source_name": "c16.png",
+      "copy": "C16_new_run.png",
+      "sha256": "33487adf644cd442032c0ed2b08e082a7596b93fe1cd43bc67306ccb8a9952fe",
+      "size_bytes": 35334,
+      "source_last_write_at": "2026-10-26T15:36:39.841001+07:00",
+      "execution_timestamp": null,
+      "title": "Run perbaikan V2"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c17.png",
+      "source_name": "c17.png",
+      "copy": "C17_clean_build.png",
+      "sha256": "725064325fbc112fdc321a759059de450bceb70b82b84a574b6c321e6440cc4c",
+      "size_bytes": 76232,
+      "source_last_write_at": "2026-10-26T15:37:44.770857+07:00",
+      "execution_timestamp": null,
+      "title": "Membersihkan artefak kompilasi"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c18.png",
+      "source_name": "c18.png",
+      "copy": "C18_archived_build.png",
+      "sha256": "5f7c7b856d13063750340133b9329f9230d7e609ac5bf61979b76f932a67c74f",
+      "size_bytes": 15253,
+      "source_last_write_at": "2026-10-26T15:42:17.431987+07:00",
+      "execution_timestamp": null,
+      "title": "Build dan arsip"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c19.png",
+      "source_name": "c19.png",
+      "copy": "C19_gate_pass.png",
+      "sha256": "5218f375d7ef9478f4058d8b1252b7abf75991001cb9848f3ca91d41af159f5c",
+      "size_bytes": 96631,
+      "source_last_write_at": "2026-10-26T15:44:39.472423+07:00",
+      "execution_timestamp": null,
+      "title": "Gate konfigurasi PASS"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c20.png",
+      "source_name": "c20.png",
+      "copy": "C20_efuse_before_v2.png",
+      "sha256": "506aaf871ad451cac180b79807316241ba9baeee5a57eb33be08ad112638d5d9",
+      "size_bytes": 21523,
+      "source_last_write_at": "2026-10-26T15:48:45.428625+07:00",
+      "execution_timestamp": null,
+      "title": "Snapshot before V2"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c21.png",
+      "source_name": "c21.png",
+      "copy": "C21_flash_v2_verified.png",
+      "sha256": "eda023d16998b63dbf71fa7e32c70f88e799e3782f93fd58c848d8a53dbd5a93",
+      "size_bytes": 101151,
+      "source_last_write_at": "2026-10-26T15:52:05.301996+07:00",
+      "execution_timestamp": null,
+      "title": "Flash V2"
+    },
+    {
+      "source": "C:\\Users\\KLAKKLIK ID\\Pictures\\Screenshots\\skenario 3\\c22.png",
+      "source_name": "c22.png",
+      "copy": "C22_serial_capture_v2.png",
+      "sha256": "3984757765b7ce09f4e4ddc06f715144ce1e8fcb73855bd9691fca63a0bd42f4",
+      "size_bytes": 16500,
+      "source_last_write_at": "2026-10-26T15:54:39.076898+07:00",
+      "execution_timestamp": null,
+      "title": "Capture first boot V2"
+    }
+  ]
+}

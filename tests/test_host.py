@@ -1,5 +1,6 @@
 import hashlib
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -17,6 +18,7 @@ from verify_dump_independent import parse_esp_image
 from extract_wifi_credentials import decode_entry
 from extract_credential_set import exact_offsets, literal_record, virtual_address
 from compile_timing_metrics import analysis_attempts, seconds_between
+from flash_c_recovery_no_reset import require_operator_confirmation, validate_efuse
 
 
 class HostPipelineTests(unittest.TestCase):
@@ -119,6 +121,28 @@ class HostPipelineTests(unittest.TestCase):
             self.assertIsNone(row["secure_boot_state"])
             self.assertIsNone(row["wifi_password_found"])
             self.assertIsNone(row["flash_read_success"])
+            run.update(experiment_role="incident_preservation_not_valid_C",
+                       scenario_validity="INVALID_INCIDENT_STATE")
+            incident = summarize_run(run.path)
+            self.assertEqual(incident["scenario_validity"], "INVALID_INCIDENT_STATE")
+            self.assertEqual(incident["experiment_role"], "incident_preservation_not_valid_C")
+            self.assertIsNone(incident["wifi_password_found"])
+
+    def test_serial_capture_failures_keep_distinct_attempts(self):
+        with tempfile.TemporaryDirectory() as folder:
+            run = ResearchRun.create("C_FLASH_ENCRYPTION", "board03", "test", Path(folder))
+            script = Path(__file__).resolve().parents[1] / "scripts" / "capture_serial.py"
+            command = [sys.executable, str(script), "--run", str(run.path),
+                       "--port", "COM_PORT_THAT_DOES_NOT_EXIST", "--seconds", "1"]
+            first = subprocess.run(command, capture_output=True, text=True)
+            second = subprocess.run(command, capture_output=True, text=True)
+            self.assertNotEqual(first.returncode, 0)
+            self.assertNotEqual(second.returncode, 0)
+            self.assertNotIn("FileExistsError", second.stderr)
+            self.assertIn("SERIAL_CAPTURE_FAILED", second.stderr)
+            attempts = list((run.path / "runtime" / "capture_attempts").iterdir())
+            self.assertEqual(len(attempts), 2)
+            self.assertTrue(all((attempt / "error.json").is_file() for attempt in attempts))
 
     def test_partition_table_from_bytes(self):
         def entry(part_type, subtype, offset, size, name):
@@ -134,6 +158,17 @@ class HostPipelineTests(unittest.TestCase):
             destructive_gate(False)
         with self.assertRaises(PermissionError):
             destructive_gate(True)
+        with self.assertRaises(PermissionError):
+            require_operator_confirmation(False)
+        require_operator_confirmation(True)
+        with self.assertRaises(ValueError):
+            validate_efuse({"MAC": {"value": "wrong"}})
+        script = Path(__file__).resolve().parents[1] / "scripts" / "flash_c_recovery_no_reset.py"
+        abbreviated = subprocess.run(
+            [sys.executable, str(script), "--run", "invalid", "--build-run", "invalid",
+             "--port", "COM9", "--confirm-destructiv"], capture_output=True, text=True)
+        self.assertEqual(abbreviated.returncode, 2)
+        self.assertIn("unrecognized arguments", abbreviated.stderr)
 
     def test_efuse_state_parity_and_unknown(self):
         self.assertIsNone(observed_efuse_state({})["flash_encryption"])

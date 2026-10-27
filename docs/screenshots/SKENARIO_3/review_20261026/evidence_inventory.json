@@ -1,0 +1,356 @@
+{
+  "run_id": "905c84ce2642",
+  "run_directory": "20261026T153522657033+0700_board03_905c84ce2642",
+  "files": [
+    {
+      "path": "device/efuse_after.json",
+      "size": 42676,
+      "sha256": "2f342881a212a2a38073345f7e708553700477ab5a538415c2158362fd64b4d1"
+    },
+    {
+      "path": "device/efuse_after_raw.txt",
+      "size": 17739,
+      "sha256": "9738872def350af67e296eb6da34fdcb7f1046ad511eeaa0a298a5650f200dad"
+    },
+    {
+      "path": "device/efuse_before.json",
+      "size": 42648,
+      "sha256": "78460a965e85506d410e552c897f02e12b34fd81e0c60be6bd743cff721e7cdd"
+    },
+    {
+      "path": "device/efuse_before_raw.txt",
+      "size": 17728,
+      "sha256": "0cc382d5596069f7e7b8cd98e56d8323b048790f88333fa9f69b15b61d742826"
+    },
+    {
+      "path": "device/efuse_diff.json",
+      "size": 16236,
+      "sha256": "39973cc14da4d451b6e8e2d9cefd7bc7e725ee06b2a62f6d2303ca2a27b07431"
+    },
+    {
+      "path": "runtime/runtime_status.json",
+      "size": 176,
+      "sha256": "0dfe79e96eb60ee00a3cfe99d11f5e130009d7dcf34dcfcc3db6d1d6c7dbf73b"
+    },
+    {
+      "path": "runtime/serial_boot.log",
+      "size": 385024,
+      "sha256": "daaaf967e48cd2c6bb67544ad82805bc0493ea45bf05b26641caf14ad412cec8"
+    },
+    {
+      "path": "runtime/serial_runtime.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "size": 9832,
+      "sha256": "2e17a82b1b3d62c0d63d2a940e35310d0f99983f44a2e91f48368edae07f15e9"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/bootloader/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "size": 9856,
+      "sha256": "1f2415b09fad4f709656624f0d5e7f9926ce931e2e0e0f7e3f9ba2591373ecef"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/bootloader/config/sdkconfig.h",
+      "size": 30294,
+      "sha256": "2e122d1fa13ee8f1ed27396b5dad9d983eefa2d250adc53dcdb2dea068d8f2a9"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/bootloader.bin",
+      "size": 32240,
+      "sha256": "b4a542fdfe611f46af1c93acf1db3d80c5cfb78b0e8f2d414c1d347f8d163ba7"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/bootloader.elf",
+      "size": 759980,
+      "sha256": "b83356123d6de5c0e5c5aa5a432db3d7910ac592292c3b9ff8625661e4e9688f"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_C.bin",
+      "size": 9832,
+      "sha256": "2e17a82b1b3d62c0d63d2a940e35310d0f99983f44a2e91f48368edae07f15e9"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/CMakeFiles/3.30.2/CMakeDetermineCompilerABI_CXX.bin",
+      "size": 9856,
+      "sha256": "1f2415b09fad4f709656624f0d5e7f9926ce931e2e0e0f7e3f9ba2591373ecef"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/config/sdkconfig.h",
+      "size": 51426,
+      "sha256": "364b9dfd794b182a3fe65fda8ba2062153e00a2e6754a53ac3993b1a0207b6d0"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/esp32s3_security_research.map",
+      "size": 9534811,
+      "sha256": "50f1677e93415ff76bcee323b8008cf419109e562dc78c1c52930508bb656b6f"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/firmware.bin",
+      "size": 777536,
+      "sha256": "26a429ca045910ec1fe508f0030a1a67ea5e81e1da32d9d4d9d970dd0d97660f"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/firmware.elf",
+      "size": 8865808,
+      "sha256": "5cce5048efa7fa3bbb8b3467c2b51bc33c9b54087db0dcf2144cab8b673d5e09"
+    },
+    {
+      "path": "build/.pio/build/flash_encryption/partitions.bin",
+      "size": 3072,
+      "sha256": "73c0b5c3e5fcba3a151cc70c453c93dd5f4798899e7f2f8cca76da1f32ffc501"
+    },
+    {
+      "path": "build/build.log",
+      "size": 99312,
+      "sha256": "f63b30655c2fef1cee6421641c9020b6ef816ef47570dfd27ee825977ae728f9"
+    },
+    {
+      "path": "build/build_manifest.json",
+      "size": 3798,
+      "sha256": "423cb6ddc06e1eb03dfa1eeae86cff9cedf393360e6011ed2a2678e0035fc0b6"
+    },
+    {
+      "path": "build/build_security_check.json",
+      "size": 255,
+      "sha256": "e3283b7b560ab9a71d05a2a3e7b1642a956d8052f13fcb6ab4d607f663ae25f7"
+    },
+    {
+      "path": "build/partitions.csv",
+      "size": 154,
+      "sha256": "71a3cb900540499c102c022634fd4458ae7fdc8a873f9f1ad87c8b53818fa224"
+    },
+    {
+      "path": "build/sdkconfig.defaults",
+      "size": 838,
+      "sha256": "25309a92cf1c17682c0e6a7ad06aebea36c92e77f8266635baec7b822d52f434"
+    },
+    {
+      "path": "build/sdkconfig.flash_encryption",
+      "size": 97832,
+      "sha256": "5b65fd75825e42f6afbd39feacd57ebf0cc31acef7913fef78f810c75e0b52ec"
+    },
+    {
+      "path": "host/commands/efuse_after_json/command.json",
+      "size": 414,
+      "sha256": "4f79f92126cfc08aa75e05366de605b16bece72f47c28a3fe7f96ee3f1679822"
+    },
+    {
+      "path": "host/commands/efuse_after_json/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/efuse_after_json/stdout.log",
+      "size": 45374,
+      "sha256": "007585406fa29958e8b3fcfbdebe7dc76603813ee2132ffcf9c66a3e580b028c"
+    },
+    {
+      "path": "host/commands/efuse_after_text/command.json",
+      "size": 384,
+      "sha256": "0e5f45d7db87bc83a74b0bedbe170bfb83f1dff94ce723badb4b39f2b47f4658"
+    },
+    {
+      "path": "host/commands/efuse_after_text/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/efuse_after_text/stdout.log",
+      "size": 17548,
+      "sha256": "0b9162fdeeec010459b8246166b4f8fbf232ff99771d24846fbdbe7a1b4e760c"
+    },
+    {
+      "path": "host/commands/efuse_before_json/command.json",
+      "size": 414,
+      "sha256": "fda91b66fc20c52cf983aeb3372df4b4d98c00b2bf79533665d76a1bd980be14"
+    },
+    {
+      "path": "host/commands/efuse_before_json/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/efuse_before_json/stdout.log",
+      "size": 45347,
+      "sha256": "1abf613f2748060b1e36a11b301cd32c345f2d114797e52d4abcb534c55ad9b5"
+    },
+    {
+      "path": "host/commands/efuse_before_text/command.json",
+      "size": 384,
+      "sha256": "4f70720e21e31d8489729462412097dc6f8ed9e7b6bdfb9d08eb47f6b7bf302b"
+    },
+    {
+      "path": "host/commands/efuse_before_text/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/efuse_before_text/stdout.log",
+      "size": 17537,
+      "sha256": "e58e407589a3c388ef030d3a2b50fea8d179bcd85d9e12fc9a5ce70bf0ee2527"
+    },
+    {
+      "path": "host/commands/espefuse_help/command.json",
+      "size": 324,
+      "sha256": "714fa9f1a4720d54dd7d9c3c9347f7cfed7fda4fdb0a19baa3fbefd14defa972"
+    },
+    {
+      "path": "host/commands/espefuse_help/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/espefuse_help/stdout.log",
+      "size": 5025,
+      "sha256": "4b25adfbbc2774aa31c6db6b9bc0206c82cd6954913f7456d9e7ca3633d8c085"
+    },
+    {
+      "path": "host/commands/espsecure_help/command.json",
+      "size": 325,
+      "sha256": "2fd54a0a3cf22d9fbb04d931e6bd0fc03079d7b7cb1ef353d2595d11257336a0"
+    },
+    {
+      "path": "host/commands/espsecure_help/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/espsecure_help/stdout.log",
+      "size": 2835,
+      "sha256": "13d8f798c59a7cb0d7e9cf3e9d0b9788a6a510a85d564bc95b9ba50eb5ea2c3c"
+    },
+    {
+      "path": "host/commands/esptool_version/command.json",
+      "size": 324,
+      "sha256": "f57020c332cefe77ab7d4ac5c127daa24817e9d9ab0fcd1adc3596d0d8536459"
+    },
+    {
+      "path": "host/commands/esptool_version/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/esptool_version/stdout.log",
+      "size": 23,
+      "sha256": "342fd169cdfea3a557bb15360ff8a8f4cf56db08eb094bfc640e633c8653104c"
+    },
+    {
+      "path": "host/commands/git_commit/command.json",
+      "size": 290,
+      "sha256": "36a48cae8050f393d5e1cbb4425e84fab10f37d40838c742ce1a658ad3d6fd8a"
+    },
+    {
+      "path": "host/commands/git_commit/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/git_commit/stdout.log",
+      "size": 41,
+      "sha256": "7da2113ab335e888ec322438d6c927082273d7055a852d233f07d6d890781565"
+    },
+    {
+      "path": "host/commands/git_status/command.json",
+      "size": 290,
+      "sha256": "ee628166cefe11e327c55605479b0dfd72eba42c416fd7a670b3be904a1b7f14"
+    },
+    {
+      "path": "host/commands/git_status/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/git_status/stdout.log",
+      "size": 394,
+      "sha256": "56c5b42d06652c9e9b01073d61e337caad44f3c036e3f1d244e1a4add3c29ebd"
+    },
+    {
+      "path": "host/commands/openssl_version/command.json",
+      "size": 297,
+      "sha256": "e2aff1e52e4a9549045666e625a7b1a0cc18aa19b1864cfc98a947c72604a2ac"
+    },
+    {
+      "path": "host/commands/openssl_version/stderr.log",
+      "size": 54,
+      "sha256": "4bc7fbd7b416d804b23c797e930108d86c77ad2fa6e7577f495e589b9837bc9e"
+    },
+    {
+      "path": "host/commands/openssl_version/stdout.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/pio_build/command.json",
+      "size": 352,
+      "sha256": "43ef3cf442b04b41ba04ac8f6931bb7714b50bd707201d3b5b355a8f198d16c8"
+    },
+    {
+      "path": "host/commands/pio_build/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/pio_build/stdout.log",
+      "size": 98035,
+      "sha256": "26f1c8e6d189afdf9a68e9b2cf9e41e13ffbac312d449557d9dc68fba121c93c"
+    },
+    {
+      "path": "host/commands/pio_packages/command.json",
+      "size": 327,
+      "sha256": "70d566b5b33bb70e6bcb2e6cb32ef5b12ccba1cb71c5feb0e7a300eace2b680a"
+    },
+    {
+      "path": "host/commands/pio_packages/stderr.log",
+      "size": 4109,
+      "sha256": "39e9962e2615ec62c2134b7a347706070d60ad746e693b696b7d080c12f7a3f7"
+    },
+    {
+      "path": "host/commands/pio_packages/stdout.log",
+      "size": 98,
+      "sha256": "1e764da6fdd7a84025f2e3874100df4e8720fe26659f8e915f3f9d72a419331a"
+    },
+    {
+      "path": "host/commands/pio_version/command.json",
+      "size": 320,
+      "sha256": "69b016bcd07987498c069f951b2831dd6ab3b69b8f858f77e08f15315d7006e3"
+    },
+    {
+      "path": "host/commands/pio_version/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/pio_version/stdout.log",
+      "size": 32,
+      "sha256": "830e99a43138820ed94cc004cfced15939817fe9346e153625d46022e9719af1"
+    },
+    {
+      "path": "host/commands/python_version/command.json",
+      "size": 299,
+      "sha256": "19d60899d005c03d070f9e5038aa9d6e9edd38687eb3c276835d0bc0bc4789a5"
+    },
+    {
+      "path": "host/commands/python_version/stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "host/commands/python_version/stdout.log",
+      "size": 15,
+      "sha256": "3c00433d6870b2f40b3bbc642b5cec6dc34ace27ad25b0c1a0bb075047ea33b8"
+    },
+    {
+      "path": "host/tool_versions.txt",
+      "size": 1549,
+      "sha256": "4fe39bc6f3d2e92e195c196514a1743240716259200ee68f2005efebb9f72e7d"
+    },
+    {
+      "path": "host/versions.json",
+      "size": 12242,
+      "sha256": "4b7c838358dd0cbe690c843561e3427d488da86eadc651a954c2bbd452e3a592"
+    }
+  ]
+}

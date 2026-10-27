@@ -1,0 +1,232 @@
+[
+  {
+    "label": "efuse_after_json",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-m",
+      "espefuse",
+      "--chip",
+      "esp32s3",
+      "--port",
+      "COM9",
+      "summary",
+      "--format",
+      "json"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:54:30.166+07:00",
+    "ended_at": "2026-10-26T15:54:31.363+07:00",
+    "duration_seconds": 1.196,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "efuse_after_text",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-m",
+      "espefuse",
+      "--chip",
+      "esp32s3",
+      "--port",
+      "COM9",
+      "summary"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:54:28.659+07:00",
+    "ended_at": "2026-10-26T15:54:30.163+07:00",
+    "duration_seconds": 1.504,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "efuse_before_json",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-m",
+      "espefuse",
+      "--chip",
+      "esp32s3",
+      "--port",
+      "COM9",
+      "summary",
+      "--format",
+      "json"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:45:58.390+07:00",
+    "ended_at": "2026-10-26T15:45:59.762+07:00",
+    "duration_seconds": 1.372,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "efuse_before_text",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-m",
+      "espefuse",
+      "--chip",
+      "esp32s3",
+      "--port",
+      "COM9",
+      "summary"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:45:56.854+07:00",
+    "ended_at": "2026-10-26T15:45:58.386+07:00",
+    "duration_seconds": 1.531,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "espefuse_help",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-m",
+      "espefuse",
+      "--help"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:35:25.829+07:00",
+    "ended_at": "2026-10-26T15:35:26.656+07:00",
+    "duration_seconds": 0.827,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "espsecure_help",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-m",
+      "espsecure",
+      "--help"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:35:26.658+07:00",
+    "ended_at": "2026-10-26T15:35:27.163+07:00",
+    "duration_seconds": 0.505,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "esptool_version",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-m",
+      "esptool",
+      "version"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:35:25.384+07:00",
+    "ended_at": "2026-10-26T15:35:25.826+07:00",
+    "duration_seconds": 0.442,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "git_commit",
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:35:27.166+07:00",
+    "ended_at": "2026-10-26T15:35:27.208+07:00",
+    "duration_seconds": 0.042,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "git_status",
+    "command": [
+      "git",
+      "status",
+      "--short"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:35:27.210+07:00",
+    "ended_at": "2026-10-26T15:35:27.260+07:00",
+    "duration_seconds": 0.049,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "openssl_version",
+    "command": [
+      "openssl",
+      "version"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:35:27.262+07:00",
+    "ended_at": "2026-10-26T15:35:27.264+07:00",
+    "duration_seconds": 0.002,
+    "exit_code": null,
+    "error": "FileNotFoundError"
+  },
+  {
+    "label": "pio_build",
+    "command": [
+      "py",
+      "-3.12",
+      "-m",
+      "platformio",
+      "run",
+      "-e",
+      "flash_encryption"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:38:01.893+07:00",
+    "ended_at": "2026-10-26T15:40:22.040+07:00",
+    "duration_seconds": 140.146,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "pio_packages",
+    "command": [
+      "py",
+      "-3.12",
+      "-m",
+      "platformio",
+      "pkg",
+      "list"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:35:23.530+07:00",
+    "ended_at": "2026-10-26T15:35:25.382+07:00",
+    "duration_seconds": 1.852,
+    "exit_code": 1,
+    "error": null
+  },
+  {
+    "label": "pio_version",
+    "command": [
+      "py",
+      "-3.12",
+      "-m",
+      "platformio",
+      "--version"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:35:22.711+07:00",
+    "ended_at": "2026-10-26T15:35:23.527+07:00",
+    "duration_seconds": 0.816,
+    "exit_code": 0,
+    "error": null
+  },
+  {
+    "label": "python_version",
+    "command": [
+      "C:\\Python314\\python.exe",
+      "--version"
+    ],
+    "working_directory": "D:\\IoT\\reverse-engineering",
+    "started_at": "2026-10-26T15:35:22.681+07:00",
+    "ended_at": "2026-10-26T15:35:22.704+07:00",
+    "duration_seconds": 0.023,
+    "exit_code": 0,
+    "error": null
+  }
+]

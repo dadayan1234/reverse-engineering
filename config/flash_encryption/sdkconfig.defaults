@@ -1,10 +1,15 @@
 CONFIG_IDF_TARGET="esp32s3"
 CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
 CONFIG_PARTITION_TABLE_CUSTOM=y
-CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="config/flash_encryption/partitions.recovery.csv"
 # CONFIG_SECURE_BOOT is not set
 CONFIG_SECURE_FLASH_ENC_ENABLED=y
 CONFIG_SECURE_FLASH_ENCRYPTION_MODE_RELEASE=y
+# Use the Flash Encryption key/state to protect NVS keys. This avoids
+# introducing a separate HMAC eFuse provisioning dependency in scenario C.
+CONFIG_NVS_SEC_KEY_PROTECT_USING_FLASH_ENC=y
+# CONFIG_NVS_SEC_KEY_PROTECT_USING_HMAC is not set
+# CONFIG_NVS_SEC_KEY_PROTECT_NONE is not set
 # First boot can irreversibly provision eFuses; do not flash or boot this environment yet.
 # Keep ROM download available for research acquisition.
 CONFIG_SECURE_INSECURE_ALLOW_DL_MODE=y

@@ -14,7 +14,9 @@ def main():
     scenario = run.manifest["scenario_id"]
     environment = SCENARIOS[scenario]
     run.event("BUILD_STARTED", environment=environment)
-    result = run.command(platformio_command() + ["run", "-e", environment], "pio_build", env=platformio_environment())
+    build_env = platformio_environment()
+    build_env["SDKCONFIG_DEFAULTS"] = str((ROOT / "config" / environment / "sdkconfig.defaults").resolve()).replace("\\", "/")
+    result = run.command(platformio_command() + ["run", "-e", environment], "pio_build", env=build_env)
     write_new(run.path / "build" / "build.log", result["stdout"] + result["stderr"])
     if result["exit_code"] != 0:
         run.update(build_success=False)
@@ -23,7 +25,9 @@ def main():
         return 1
     build_dir = ROOT / ".pio" / "build" / environment
     artifacts = {}
-    candidates = [ROOT / f"sdkconfig.{environment}"] + list(build_dir.rglob("*.bin")) + list(build_dir.glob("*.elf")) + list(build_dir.glob("*.map"))
+    candidates = [ROOT / f"sdkconfig.{environment}",
+                  build_dir / "config" / "sdkconfig.h",
+                  build_dir / "bootloader" / "config" / "sdkconfig.h"] + list(build_dir.rglob("*.bin")) + list(build_dir.glob("*.elf")) + list(build_dir.glob("*.map"))
     for source in candidates:
         if not source.is_file():
             continue
@@ -37,7 +41,9 @@ def main():
                                     "size": target.stat().st_size, "sha256": sha256_file(target)}
     defaults = ROOT / "config" / environment / "sdkconfig.defaults"
     shutil.copyfile(defaults, run.path / "build" / "sdkconfig.defaults")
-    shutil.copyfile(ROOT / "partitions.csv", run.path / "build" / "partitions.csv")
+    partition_source = (ROOT / "config" / "flash_encryption" / "partitions.recovery.csv"
+                        if scenario == "C_FLASH_ENCRYPTION" else ROOT / "partitions.csv")
+    shutil.copyfile(partition_source, run.path / "build" / "partitions.csv")
     if f"sdkconfig.{environment}" not in artifacts:
         run.update(build_success=False, notes=run.manifest["notes"] + ["resolved sdkconfig missing"])
         run.event("BUILD_FAILED", reason="resolved sdkconfig missing")

@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from lib.research_logger import ROOT, ResearchRun, write_json_new
 
-FIELDS = ["experiment_id", "scenario_id", "board_id", "run_id", "timestamp", "git_commit",
+FIELDS = ["experiment_id", "experiment_role", "scenario_validity", "scenario_id", "board_id", "run_id", "timestamp", "git_commit",
           "flash_size_detected", "secure_boot_config_expected", "flash_encryption_config_expected",
           "secure_boot_state", "flash_encryption_state", "flash_encryption_mode",
           "rom_download_accessible", "serial_boot_success", "flash_read_attempted", "flash_read_success",
@@ -17,7 +17,7 @@ def summarize_run(path: Path) -> dict:
     run = ResearchRun(path)
     m = run.manifest
     result = {field: None for field in FIELDS}
-    result.update({key: m.get(key) for key in ("experiment_id", "scenario_id", "board_id", "run_id",
+    result.update({key: m.get(key) for key in ("experiment_id", "experiment_role", "scenario_validity", "scenario_id", "board_id", "run_id",
                    "git_commit", "flash_size_detected", "secure_boot_config_expected",
                    "flash_encryption_config_expected", "flash_encryption_mode", "rom_download_accessible",
                    "serial_boot_success", "flash_read_attempted", "flash_read_success", "acquisition_status")})
